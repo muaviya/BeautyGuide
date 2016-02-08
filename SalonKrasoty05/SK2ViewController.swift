@@ -11,6 +11,7 @@ class SK2ViewController: UIViewController {
     @IBOutlet weak var adressSK2Label: UILabel!
     var sk2VC :SK!
     
+    @IBOutlet weak var myNavigationBar: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +20,8 @@ class SK2ViewController: UIViewController {
         adressSK2Label.text = sk2VC.location
         
         imageSK2VC.image = UIImage(named: sk2VC.image)
+        
+        myNavigationBar.title = sk2VC.name
 
         // Do any additional setup after loading the view.
     }

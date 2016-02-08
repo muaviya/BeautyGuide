@@ -16,12 +16,30 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="заставка пнг" translatesAutoresizingMaskIntoConstraints="NO" id="jug-Bl-5Of">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="Jzp-LE-m0h"/>
+                                    <constraint firstAttribute="height" constant="600" id="h4W-dO-7Zg"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jug-Bl-5Of" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="DTs-Za-Gka"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="jug-Bl-5Of" secondAttribute="bottom" id="Y3O-lb-IYt"/>
+                            <constraint firstItem="jug-Bl-5Of" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="rPc-SN-ebB"/>
+                            <constraint firstAttribute="trailing" secondItem="jug-Bl-5Of" secondAttribute="trailing" id="vi4-w3-9u3"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="484" y="374"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="заставка пнг" width="640" height="1136"/>
+    </resources>
 </document>

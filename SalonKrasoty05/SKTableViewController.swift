@@ -1,37 +1,45 @@
 
 import UIKit
 
-class SKTableViewController: UITableViewController {
+class SKTableViewController: UITableViewController, UISearchResultsUpdating {
 
-    @IBOutlet weak var menuButton: UIBarButtonItem!
+    var mySearchController: UISearchController!
     
     var skArray: [SK] = [
         SK(name: "Лаборатория Красоты", location: "Республика Дагестан, Махачкала г., ул. Дахадаева, 56", phoneNumber: "+7(989)8797997", image: "1.jpg"),
-        SK(name: "Жалин", location: "Республика Дагестан, Махачкала г., ул. М. Горького, 37", phoneNumber: "+7(967)4078877", image: "2.jpg"),
-        SK(name: "Гузель",  location: "Республика Дагестан, Махачкала г., ул. Ярагского, 69", phoneNumber: "+7(988)265-67-67", image: "3.jpg"),
-        SK(name: "Supreme", location: "Республика Дагестан, Махачкала ул. М. Ярагского, 35", phoneNumber: "+7(928)958-11-66", image: "11.jpg"),
-        SK(name: "Олимп", location: "Республика Дагестан, Махачкала г., ул. Ярагского, 32", phoneNumber: "+7(988)292-03-58", image: "5.jpg"),
-        SK(name: "NOA",  location: "Республика Дагестан, Махачкала г., ул. Ярагского, 32", phoneNumber: "+7(988)797-60-00", image: "6.jpg"),
+        SK(name: "Жалин", location: "Республика Дагестан, Махачкала г., ул. М. Горького, 37", phoneNumber: "+7(967)4078877", image: "jalin.jpg"),
+        SK(name: "Гузель",  location: "Республика Дагестан, Махачкала г., ул. Ярагского, 69", phoneNumber: "+7(988)2656767", image: "guzel.jpg"),
+        SK(name: "Supreme", location: "Республика Дагестан, Махачкала ул. М. Ярагского, 35", phoneNumber: "+7(928)9581166", image: "supreme.jpg"),
+        SK(name: "Олимп", location: "Республика Дагестан, Махачкала г., ул. Ярагского, 32", phoneNumber: "+7(988)2920358", image: "5.jpg"),
+        SK(name: "NOA",  location: "Республика Дагестан, Махачкала г., ул. Ярагского, 32", phoneNumber: "+7(988)7976000", image: "6.jpg"),
         SK(name: "Moda", location: "Республика Дагестан, Избербаш г., ул. Ярагского 32", phoneNumber: "675677", image: "7.jpg"),
         SK(name: "Красотка", location: "Республика Дагестан, Махачкала г., пр. Гамидова 57", phoneNumber: "626920", image: "8.jpg"),
-        SK(name: "Зеркало", location: "Республика Дагестан, Махачкала г., ул.Дахадаева, 105", phoneNumber: "+7(988)224-22-50", image: "9.jpg"),
-        SK(name: "Соблазн",  location: "Республика Дагестан, Махачкала г., просп. Акушинского, 78", phoneNumber: "+7(928)054-59-34", image: "10.jpg"),
-        SK(name: "Муталлиевой Сарат",  location: "Республика Дагестан, Махачкала г., просп. Шамиля, 18/а", phoneNumber: "+7(988)292-23-22", image: "12.jpg"),
-        SK(name: "Формула Красоты",  location: "368502, Республика Дагестан, Махачкала г., ул.Казбекова, 176 /г", phoneNumber: "+7(965)490-05-05", image: "13.jpg"),
-        SK(name: "ИЕР",  location: "Республика Дагестан, Махачкала г., ул.И.Шамиля, 18 г", phoneNumber: "+7(928)558-80-40", image: "grahamavenuemeats.jpg"),
-        SK(name: "Чайка",  location: "Республика Дагестан, Махачкала г., просп. Петра 1, 55", phoneNumber: "+7(964)003-70-83", image: "wafflewolf.jpg"),
-        SK(name: "Amore",  location: "Республика Дагестан, Махачкала  г., ул.Нахимова, 2", phoneNumber: "+7(960)408-99-67", image: "fiveleaves.jpg"),
-        SK(name: "Art & Style",  location: "Республика Дагестан, Махачкала г., ул.Яракского, 74", phoneNumber: "+7(988)292-09-25", image: "cafelore.jpg"),
-        SK(name: "Aza",  location: "Республика Дагестан, Махачкала г., ул. Коркмасова, 52", phoneNumber: "+7(988)290-54-31", image: "confessional.jpg"),
-        SK(name: "Basira",  location: "Республика Дагестан, Махачкала г., ул.Г.Далгата, 6", phoneNumber: "+7(928)590-59-84", image: "barrafina.jpg"),
-        SK(name: "Beaty Room",  location: "Республика Дагестан, Махачкала г., проспект. Петра первого, 29 в", phoneNumber: "+7(988)781-78-22", image: "donostia.jpg")
+        SK(name: "Зеркало", location: "Республика Дагестан, Махачкала г., ул.Дахадаева, 105", phoneNumber: "+7(988)2242250", image: "9.jpg"),
+        SK(name: "Соблазн",  location: "Республика Дагестан, Махачкала г., просп. Акушинского, 78", phoneNumber: "+7(928)0545934", image: "10.jpg"),
+        SK(name: "Муталлиевой Сарат",  location: "Республика Дагестан, Махачкала г., просп. Шамиля, 18/а", phoneNumber: "+7(988)2922322", image: "12.jpg"),
+        SK(name: "Формула Красоты",  location: "368502, Республика Дагестан, Махачкала г., ул.Казбекова, 176 /г", phoneNumber: "+7(965)4900505", image: "13.jpg"),
+        SK(name: "ИЕР",  location: "Республика Дагестан, Махачкала г., ул.И.Шамиля, 18 г", phoneNumber: "+7(928)5588040", image: "ier.jpg"),
+        SK(name: "Чайка",  location: "Республика Дагестан, Махачкала г., просп. Петра 1, 55", phoneNumber: "+7(964)0037083", image: "chaika.jpg"),
+        SK(name: "Amore",  location: "Республика Дагестан, Махачкала  г., ул.Нахимова, 2", phoneNumber: "+7(960)4089967", image: "amore.jpg"),
+        SK(name: "Art & Style",  location: "Республика Дагестан, Махачкала г., ул.Яракского, 74", phoneNumber: "+7(988)2920925", image: "art.jpg"),
+        SK(name: "Aza",  location: "Республика Дагестан, Махачкала г., ул. Коркмасова, 52", phoneNumber: "+7(988)2905431", image: "aza.jpg"),
+        SK(name: "Basira",  location: "Республика Дагестан, Махачкала г., ул.Г.Далгата, 6", phoneNumber: "+7(928)5905984", image: "basira.jpg"),
+        SK(name: "Beaty Room",  location: "Республика Дагестан, Махачкала г., проспект. Петра первого, 29 в", phoneNumber: "+7(988)7817822", image: "beutyRoom.jpg")
     ]
     
+    var searchResult: [SK] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
-            // Удалить title у кнопки  back
-            navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
+        mySearchController = UISearchController(searchResultsController: nil)
+        tableView.tableHeaderView = mySearchController.searchBar
+        
+        mySearchController.searchResultsUpdater = self
+        mySearchController.dimsBackgroundDuringPresentation = false
+        mySearchController.searchBar.placeholder = "Поиск салонов красоты"
+        
+        // Удалить title у кнопки  back
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
         // Самомасштабирование
         tableView.estimatedRowHeight = 80.0
@@ -51,20 +59,36 @@ class SKTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if mySearchController.active {
+            return searchResult.count
+        } else {
         return skArray.count
+        }
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CustomTableViewCell
+        
+        let sk = (mySearchController.active) ?  searchResult[indexPath.row] : skArray[indexPath.row]
        
         // Настройка ячейки
-        cell.nameLabel.text = skArray[indexPath.row].name
-        cell.thumbnailImageView.image = UIImage(named: skArray[indexPath.row].image)
-        cell.locationLabel.text = skArray[indexPath.row].location
+        cell.nameLabel.text = sk.name
+        cell.thumbnailImageView.image = UIImage(named: sk.image)
+        cell.locationLabel.text = sk.location
 
         return cell
     }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if mySearchController.active {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         //Social
         let shareAction = UITableViewRowAction(style: .Default, title: "Поделится", handler: { (actin, indexPath) -> Void in
@@ -91,7 +115,8 @@ class SKTableViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destinationViewController as! SK2ViewController
-                destinationController.sk2VC = skArray[indexPath.row]
+                destinationController.sk2VC = (mySearchController.active) ? searchResult[indexPath.row] :  skArray[indexPath.row]
+                
             }
         }
     }
@@ -102,6 +127,22 @@ class SKTableViewController: UITableViewController {
         
         navigationController?.hidesBarsOnSwipe = true
         prefersStatusBarHidden()
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        if let searchText = mySearchController.searchBar.text {
+            filterContect(searchText)
+            tableView.reloadData()
+        }
+    }
+    
+    func filterContect(searchText: String) {
+        searchResult = skArray.filter({ (sk: SK) -> Bool in
+            let nameMatch = sk.name.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil)
+            let locationMatch = sk.location.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil)
+            
+            return nameMatch != nil || locationMatch != nil
+        })
     }
     
 }
